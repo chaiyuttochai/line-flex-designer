@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broadcast Flex Message</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    textarea { width: 100%; height: 200px; }
+    #preview { white-space: pre; border: 1px solid #ccc; padding: 10px; margin-top: 10px; }
+    button { margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Broadcast Flex Message</h1>
+  <textarea id="flex-input" placeholder="Enter Flex Message JSON here"></textarea>
+  <div>
+    <button onclick="preview()">Preview</button>
+    <button onclick="broadcast()">Broadcast</button>
+  </div>
+  <h2>Preview</h2>
+  <div id="preview"></div>
+
+  <script>
+    function preview() {
+      const input = document.getElementById('flex-input').value;
+      try {
+        const json = JSON.parse(input);
+        document.getElementById('preview').textContent = JSON.stringify(json, null, 2);
+      } catch (e) {
+        document.getElementById('preview').textContent = 'Invalid JSON';
+      }
+    }
+
+    async function broadcast() {
+      const input = document.getElementById('flex-input').value;
+      try {
+        const payload = JSON.parse(input);
+        const res = await fetch('/broadcast', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        alert('Broadcast status: ' + result.status);
+      } catch (e) {
+        alert('Invalid JSON or network error');
+      }
+    }
+  </script>
+</body>
+</html>
