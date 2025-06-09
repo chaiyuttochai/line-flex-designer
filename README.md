@@ -8,6 +8,17 @@ Line Flex Designer is a web-based project for creating and previewing flexible d
 - **Frontend:** [Angular v20](https://angular.io/)
 - **Database:** [MariaDB](https://mariadb.org/)
 
+## Code Structure
+
+```
+line-flex-designer/
+├── server/   # Node.js + Express backend
+├── client/   # Angular v20 frontend
+└── README.md
+```
+
+The **server** directory contains the Node.js backend. The **client** directory holds the Angular code. Project docs like this README live at the root.
+
 ## Getting Started
 
 ### Pre-installation
