@@ -10,6 +10,17 @@ Line Flex Designer is a web-based project for creating and previewing flexible d
 
 ## Getting Started
 
+### Pre-installation
+Verify that your local tools can run before installing dependencies:
+
+```bash
+node -v        # check Node.js
+ng version     # check Angular CLI
+mysql -u <user> -p -e "SELECT VERSION();"  # verify MariaDB access
+```
+
+Create any required environment files (e.g., `.env`) with your database credentials **before** running `npm install`.
+
 ### Prerequisites
 
 Make sure you have the following installed:
