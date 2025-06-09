@@ -1,11 +1,11 @@
 # Line Flex Designer
 
-Line Flex Designer is a web-based project for creating and previewing flexible design layouts. It couples a Node.js backend with an Angular frontend so you can manage designs from any modern browser.
+Line Flex Designer is a web-based project for creating and previewing flexible design layouts. It couples a Node.js backend with a web frontend so you can manage designs from any modern browser. The initial frontend is a simple static page that lets you craft broadcast messages, but it can be expanded with Angular in the future.
 
 ## Stack Overview
 
 - **Backend:** Node.js (with [Express](https://expressjs.com/) suggested for routing and middleware)
-- **Frontend:** [Angular v20](https://angular.io/)
+- **Frontend:** Static HTML/JS (Angular can be added later)
 - **Database:** [MariaDB](https://mariadb.org/)
 
 ## Code Structure
@@ -13,11 +13,11 @@ Line Flex Designer is a web-based project for creating and previewing flexible d
 ```
 line-flex-designer/
 ├── server/   # Node.js + Express backend
-├── client/   # Angular v20 frontend
+├── client/   # Static frontend files (initial broadcast page)
 └── README.md
 ```
 
-The **server** directory contains the Node.js backend. The **client** directory holds the Angular code. Project docs like this README live at the root.
+The **server** directory contains the Node.js backend. The **client** directory holds the static broadcast page (and can later host an Angular app). Project docs like this README live at the root.
 
 ## Getting Started
 
@@ -26,7 +26,6 @@ Verify that your local tools can run before installing dependencies:
 
 ```bash
 node -v        # check Node.js
-ng version     # check Angular CLI
 mysql -u <user> -p -e "SELECT VERSION();"  # verify MariaDB access
 ```
 
@@ -37,7 +36,6 @@ Create any required environment files (e.g., `.env`) with your database credenti
 Make sure you have the following installed:
 
 - [Node.js](https://nodejs.org/) 18 or later
-- [Angular CLI](https://angular.io/cli) v20
 - [MariaDB](https://mariadb.org/) server
 
 ### Install Dependencies
@@ -45,9 +43,7 @@ Make sure you have the following installed:
 From the project root, install the server and client dependencies. If the Angular client resides in a `client` folder (adjust if different):
 
 ```bash
-npm install               # install server dependencies
-cd client && npm install  # install Angular client dependencies
-cd ..
+cd server && npm install  # install server dependencies
 ```
 
 ### Running the Server
@@ -60,13 +56,7 @@ npm start
 
 ### Running the Client
 
-From the `client` directory run:
-
-```bash
-ng serve
-```
-
-Then open your browser to the URL shown in the CLI output, usually `http://localhost:4200/`.
+The server also serves the static client files. After starting the server, open your browser to `http://localhost:3000/` to access the broadcast page.
 
 ## Contributing
 
