@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>LINE Flex Designer</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 2em; }
+textarea { width: 100%; height: 200px; }
+</style>
+</head>
+<body>
+<h1>LINE Flex Designer</h1>
+<form id="form" enctype="multipart/form-data">
+  <label>Choose Template:</label>
+  <select id="templateSelect">
+    <option value="sample1">Sample 1</option>
+    <option value="sample2">Sample 2</option>
+  </select>
+  <br><br>
+  <label>Edit Template JSON:</label><br>
+  <textarea name="template" id="templateArea"></textarea>
+  <br>
+  <label>Upload User IDs (CSV or text):</label>
+  <input type="file" name="users" id="usersFile" accept=".txt,.csv" />
+  <br><br>
+  <button type="submit">Broadcast</button>
+</form>
+<pre id="result"></pre>
+<script>
+const templates = {
+  sample1: {
+    type: "flex",
+    altText: "Hello",
+    contents: {
+      type: "bubble",
+      body: { type: "box", layout: "vertical", contents: [ { type: "text", text: "Sample1" } ] }
+    }
+  },
+  sample2: {
+    type: "flex",
+    altText: "Hi",
+    contents: {
+      type: "bubble",
+      body: { type: "box", layout: "vertical", contents: [ { type: "text", text: "Sample2" } ] }
+    }
+  }
+};
+function updateTemplate() {
+  const key = document.getElementById('templateSelect').value;
+  document.getElementById('templateArea').value = JSON.stringify(templates[key], null, 2);
+}
+document.getElementById('templateSelect').addEventListener('change', updateTemplate);
+updateTemplate();
+
+const form = document.getElementById('form');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  const res = await fetch('/broadcast', { method: 'POST', body: data });
+  const text = await res.text();
+  document.getElementById('result').textContent = text;
+});
+</script>
+</body>
+</html>
